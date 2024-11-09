@@ -1,0 +1,181 @@
+@font-face {
+  font-family: "New York Extra Large";
+  src: url("../fonts/New-York-fonts-master/NewYorkExtraLarge-Medium.otf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Mono";
+  src: url("../fonts/sf-mono/SFMonoRegular.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Text';
+    src: url('../fonts/San Francisco Pro Text/SFProText-Regular.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: "GTF Chapter";
+  src: url("../fonts/Chapter/GTFChapterTRIAL-Regular.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Nokia Cellphone';
+    src: url('../fonts/nokia_cellphone/nokiafc22.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Basis Grotesque';
+    src: url('../fonts/Basis Grotesque PRO Font Family/BasisGrotesqueArabicPro-Regular.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Harriet Text';
+    src: url('../fonts/harriet-text/HARRIETTEXTMEDIUM.OTF') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mackay';
+    src: url('../fonts/Mackay/Rene Bieder - Mackay DEMO Bold.otf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "SF Pro Text", sans-serif;
+  box-sizing: border-box;
+}
+
+.app {
+    overflow: hidden;
+}
+
+header {
+    background: #FFD900;
+
+}
+
+.content {
+    width: fit-content;
+    padding-left: 13rem;
+}
+
+.header-content {
+    padding-top: 5.5325rem;
+    padding-bottom: 3.2rem;
+}
+
+.version {
+    position: relative;
+    bottom: -0.9rem;
+    height: 2.4rem;
+    padding-left: 0.9rem;
+    font-family: "SF Mono", sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 2.4rem;
+    text-align: left;
+
+}
+
+.header-title {
+    position: relative;
+    font-family: 'New York Extra Large', sans-serif;
+    font-size: 20rem;
+    line-height: 23.9rem;
+    font-weight: 700;
+    width: 82.9rem;
+}
+
+/*container*/
+.container {
+    padding: 0 13rem;
+}
+
+.container-item {
+    margin-top: 9rem;
+}
+
+.container-item:first-child {
+    margin-top: 10.3rem;
+}
+
+.container-item:last-child {
+    margin-top: 8rem;
+    margin-bottom: 29.5rem;
+}
+
+.container-head {
+    font-family: 'New York Extra Large', sans-serif;
+    font-size: 4.4rem;
+    font-weight: 700;
+    line-height: 5.3rem;
+}
+
+.container-desc {
+    border-left: 0.6rem solid #000;
+    padding-left: 2.9rem;
+    margin-left: 0.3rem;
+    margin-top: 2.6rem;
+}
+
+.container-desc:last-child {
+    margin-top: 2.4rem;
+    padding-bottom: 0.7rem;
+}
+
+.container-desc__text {
+    display: block;
+    max-height: 96px;
+    min-height: 48px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23.87px;
+}
+
+.container-desc__small {
+    display: block;
+    margin-top: 3.2rem;
+    padding-left: 0.5rem;
+    min-height: 4.8rem;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 2.4rem;
+}
+
+.container-desc__small div {
+    height: 4.8rem;
+}
+
+.container-desc__small h3 {
+    font-size: 5rem;
+    line-height: 5.02rem;
+}
