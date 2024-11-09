@@ -66,6 +66,10 @@ img {
   display: block;
 }
 
+a {
+  cursor: pointer;
+}
+
 .app {
     font-size: 2rem;
     color: #000000;
@@ -89,6 +93,7 @@ img {
 
 .header-logo {
   max-height: 3.753rem;
+  cursor: pointer;
 }
 
 .header-logo img {
