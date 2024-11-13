@@ -161,7 +161,7 @@ main {
 }
 .banner {
     margin: auto;
-    padding: 7.7rem 29.3rem 0rem;
+    padding: 7.6rem 29.3rem 0rem;
     text-align: center;
 }
 
@@ -326,6 +326,10 @@ main {
 
 .head-item:nth-child(7) {
     margin-right: 17px;
+}
+
+.head-item:nth-child(8) {
+    margin-right: 10px;
 }
 
 .footer-container__main {
@@ -611,5 +615,11 @@ main {
   }
   .articles-item__title {
     width: auto;
+  }
+}
+
+@media (max-width: 375px) {
+  .header-logo img {
+    max-width: 80%;
   }
 }

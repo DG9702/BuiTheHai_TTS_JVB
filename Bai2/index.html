@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 2 - Calendar Javascript</title>
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <section class="header">
+            <div class="header__time-box">
+                <span class="header__date">Monday, November 11</span>
+            </div>
+            <div class="icon pointer">
+                <i class="fa-solid fa-angle-down"></i>
+            </div>
+        </section>
+        <!-- Content -->
+        <section class="content">
+            <div class="content__heading flex-box">
+                <div class="current__month--year pointer"></div>
+                <div class="content__arrow flex-box">
+                    <div class="content__arrow--icon content__arrow-up pointer">
+                        <i class="fa-solid fa-caret-up"></i>
+                    </div>
+                    <div class="content__arrow--icon content__arrow-down pointer">
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                   
+                </div>
+            </div>
+            <ul class="content__date-box ul-flex-box pointer">
+                <ul class="content__weekday ul-flex-box">
+                    <li>Su</li>
+                    <li>Mo</li>
+                    <li>Tu</li>
+                    <li>We</li>
+                    <li>Th</li>
+                    <li>Fr</li>
+                    <li>Sa</li>
+                </ul>
+            </ul>
+            <ul class="content__month-box ul-flex-box pointer"></ul>
+            <ul class="content__year-box ul-flex-box pointer"></ul>
+        </section>
+
+        <!-- Footer section -->
+        <footer class="footer">
+            <div class="footer__date flex-box">
+                <div class="footer__date--second">
+                    <div class="icon pointer">
+                        <i class="fa-solid fa-minus"></i>
+                    </div>
+                    <span><strong>30</strong> mins</span>
+                    <div class="icon pointer">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                </div>
+                <div class="focus">
+                    <div style="padding-top: 0.4rem; padding-bottom: 0.4rem;" class="icon pointer">
+                        <i class="fa-solid fa-play"></i>
+                        <span style="margin-left: 4px;">Focus</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="./assets/js/calendar.js"></script>
+</body>
+</html>
