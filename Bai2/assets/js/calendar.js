@@ -7,15 +7,18 @@ const nextBtn = document.querySelector(`.content__arrow-down`);
 const contentWeek = document.querySelector(`.content__weekday`);
 const monthBox = document.querySelector(`.content__month-box`);
 const yearBox = document.querySelector(`.content__year-box`);
+const boxContainer = document.querySelector(`.ul-flex-box`);
+
+const currentDate = new Date();
+let currentYear = currentDate.getFullYear();
+let currentMonth = currentDate.getMonth();
+let currentDay = currentDate.getDate();
 
 const app = {
     currentStartYear: Math.floor(new Date().getFullYear() / 10) * 10,
     daysOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
     ],
     months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-    monthsInBox: [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-    ],
     getCurrentHeaderDate: function () {
         const today = new Date();
 
@@ -32,7 +35,6 @@ const app = {
     },
     // generate calendar
     generateDates: function (year, month) {
-        const currentDate = new Date();
         calendar.innerHTML = `
             <ul class="content__weekday ul-flex-box">
                 <li>Su</li>
@@ -57,7 +59,7 @@ const app = {
         }
         for (let i = 1;i <= lastDay;i++) {
             const dayElement = document.createElement('li');
-            if (i === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear()) {
+            if (i === currentDay && month === currentMonth && year === currentYear) {
                 dayElement.classList.add('active');
             }
             dayElement.innerHTML = i;
@@ -68,11 +70,6 @@ const app = {
         for (let i = 1;i <= nextDays;i++) {
             const dayElement = document.createElement('li');
             dayElement.innerHTML = i;
-            console.log("Check i", i);
-            console.log("Check nextDays", nextDays);
-            console.log("Check firstDay", firstDay);
-            console.log("Check lastDay", lastDay);
-
             dayElement.classList.add('content__day', 'none__active');
             calendar.appendChild(dayElement);
         }
@@ -86,25 +83,19 @@ const app = {
     },
     // display current calendar
     displayCurrentCalendar: function () {
-        const currentDate = new Date();
-        const currentYear = currentDate.getFullYear();
-        const currentMonth = currentDate.getMonth();
         this.generateDates(currentYear, currentMonth);
     },
     // generate month box layout
     generateMonthBox: function () {
         monthBox.innerHTML = '';
-        const currentDate = new Date();
-        const currentMonthIndex = currentDate.getMonth();
-        const currentYear = currentDate.getFullYear();
 
         for (let i = 0;i < 16;i++) {
             const monthIndex = i % 12;
-            const monthName = this.monthsInBox[monthIndex];
+            const monthName = this.months[monthIndex].slice(0, 3);
             const monthElement = document.createElement('li');
             monthElement.innerHTML = monthName;
             monthElement.classList.add("content__month");
-            if (monthIndex === currentMonthIndex && contentDate.textContent === currentYear.toString()) {
+            if (monthIndex === currentMonth && contentDate.textContent === currentYear.toString()) {
                 monthElement.classList.add("active")
             }
             if (i > 11) {
@@ -113,6 +104,8 @@ const app = {
             monthBox.appendChild(monthElement)
         }
 
+        contentDate.classList.remove('disabled');
+        contentDate.classList.add('pointer');
         calendar.style.display = 'none';
         contentWeek.style.display = 'none';
         yearBox.style.display = 'none';
@@ -121,61 +114,37 @@ const app = {
         this.monthClickEvent();
     },
     // generate year box layout
-    generateYearBox: function (startYear) {
-        yearBox.innerHTML = '';
-        const currentDate = new Date();
+    generateYearBox: function (year) {
+        let htmls = '';
+        const VIEW = 16;
+        const startDecadeYear = year - (year % 10);
+        const endYear = startDecadeYear + 9;
 
-        const endYear = startYear + 9;
-
-        if ((startYear / 10) % 2 === 0) {
-            startYear = startYear;
-        } else {
-            startYear = startYear - 2;
+        const notCurrentYearTop = startDecadeYear % 4 === 0 ? 0 : 2
+        for (let i = 0;i < notCurrentYearTop;i++) {
+            htmls += `<li class="content__year none__active" data-year="${startDecadeYear - i}">${startDecadeYear - i}</li>`
         }
 
-        for (let i = 0;i < 16;i++) {
-            if ((startYear / 10) % 2 === 0) {
-                const year = startYear + i;
-                const yearElement = document.createElement("li");
-                yearElement.textContent = year;
-                yearElement.classList.add("content__year");
-                if (year === currentDate.getFullYear()) {
-                    yearElement.classList.add("active");
-                }
-                if (i > 9) {
-                    yearElement.classList.add("none__active");
-                }
-                yearBox.appendChild(yearElement);
-            } else {
-                const year = startYear + i;
-                const yearElement = document.createElement("li");
-                yearElement.textContent = year;
-                yearElement.classList.add("content__year");
-                if (year === currentDate.getFullYear()) {
-                    yearElement.classList.add("active");
-                }
-                if (i < 2 || i > 11) {
-                    yearElement.classList.add("none__active");
-                }
-                yearBox.appendChild(yearElement);
-            }
+        for (let i = startDecadeYear;i <= endYear;i++) {
+            htmls += `<li class="content__year ${i === currentYear ? 'active' : ''}" data-year="${i}">${i}</li>`
         }
 
+        const notCurrentYearBottom = VIEW - (endYear - startDecadeYear + 1) - notCurrentYearTop;
+        for (let i = 1;i <= notCurrentYearBottom;i++) {
+            htmls += `<li class="content__year none__active" data-year="${endYear + i}">${endYear + i}</li>`
+        }
         monthBox.style.display = 'none';
         yearBox.style.display = 'flex';
 
+        yearBox.innerHTML = htmls;
+        contentDate.classList.add('disabled');
+        contentDate.classList.remove('pointer');
         this.yearClickEvent();
-
-        contentDate.textContent = `${startYear}-${endYear}`;
+        contentDate.textContent = `${startDecadeYear}-${endYear}`;
     },
     // event day when click
     dayClickEvent: function () {
         const _this = this;
-        const currentDate = new Date();
-        const currentDay = currentDate.getDate();
-        const currentMonth = currentDate.getMonth();
-        const currentYear = currentDate.getFullYear();
-
         const days = document.querySelectorAll('.content__day');
 
         days.forEach(day => {
@@ -192,9 +161,9 @@ const app = {
                 let year = currentYear;
 
                 if (day.classList.contains('none__active')) {
-                    const currentDate = contentDate.textContent.split(' ');
-                    const currentMonthIndex = _this.months.indexOf(currentDate[0]);
-                    const displayYear = parseInt(currentDate[1]);
+                    const currentDateIndex = contentDate.textContent.split(' ');
+                    const currentMonthIndex = _this.months.indexOf(currentDateIndex[0]);
+                    const displayYear = parseInt(currentDateIndex[1]);
 
                     if (dayOfMonth < 15) {
                         month = currentMonthIndex + 1;
@@ -210,9 +179,9 @@ const app = {
                         }
                     }
                 } else {
-                    const currentDate = contentDate.textContent.split(' ');
-                    month = _this.months.indexOf(currentDate[0]);
-                    year = parseInt(currentDate[1]);
+                    const currentDateIndex = contentDate.textContent.split(' ');
+                    month = _this.months.indexOf(currentDateIndex[0]);
+                    year = parseInt(currentDateIndex[1]);
                 }
 
             });
@@ -223,12 +192,11 @@ const app = {
         const _this = this;
         const months = document.querySelectorAll('.content__month');
 
-        months.forEach(month => {
+        months.forEach((month, index) => {
             month.addEventListener('click', function () {
-                const monthIndex = _this.monthsInBox.indexOf(month.textContent);
                 const currentYear = parseInt(contentDate.textContent);
-                _this.generateDates(currentYear, monthIndex);
-                contentDate.textContent = `${_this.months[monthIndex]} ${currentYear}`;
+                _this.generateDates(currentYear, index);
+                contentDate.textContent = `${_this.months[index]} ${currentYear}`;
             });
         });
 
@@ -304,7 +272,7 @@ const app = {
         };
 
         // previous button click event
-        prevBtn.addEventListener('click', function () {
+        function prevBtnFunc() {
             if (calendar.style.display === 'flex') {
                 let currentTime = contentDate.textContent;
                 let text = currentTime.split(' ');
@@ -316,41 +284,60 @@ const app = {
             } else {
                 showPrevMonthBox();
             }
-        }),
+        }
 
-            // next button click event
-            nextBtn.addEventListener('click', function () {
-                if (calendar.style.display === 'flex') {
-                    let currentTime = contentDate.textContent;
-                    let text = currentTime.split(' ');
-                    let currentYear = Number(text[1]);
-                    let currentMonth = text[0];
-                    showNextMonth(currentYear, currentMonth);
-                } else if (yearBox.style.display === 'flex') {
-                    showNextDecade();
-                } else {
-                    showNextMonthBox();
-                }
-            }),
+        // next button click event
+        function nextBtnFunc() {
+            if (calendar.style.display === 'flex') {
+                let currentTime = contentDate.textContent;
+                let text = currentTime.split(' ');
+                let currentYear = Number(text[1]);
+                let currentMonth = text[0];
+                showNextMonth(currentYear, currentMonth);
+            } else if (yearBox.style.display === 'flex') {
+                showNextDecade();
+            } else {
+                showNextMonthBox();
+            }
+        }
 
-            // date in content when click
-            contentDate.addEventListener('click', function () {
-                if (calendar.style.display === 'flex') {
-                    let currentTime = contentDate.textContent;
-                    let text = currentTime.split(' ');
-                    let currentYear = Number(text[1]);
-                    contentDate.textContent = currentYear.toString();
-                    _this.generateMonthBox();
-                } else if (monthBox.style.display === 'flex') {
-                    let currentYear = Number(contentDate.textContent);
-                    const startYear = Math.floor(currentYear / 10) * 10;
-                    console.log("Check startYear: ", (2019 / 10) % 2);
+        // date in content when click
+        contentDate.addEventListener('click', function () {
+            if (calendar.style.display === 'flex') {
+                let currentTime = contentDate.textContent;
+                let text = currentTime.split(' ');
+                let currentYear = Number(text[1]);
+                contentDate.textContent = currentYear.toString();
+                _this.generateMonthBox();
+            } else if (monthBox.style.display === 'flex') {
+                let currentYear = Number(contentDate.textContent);
+                const startYear = Math.floor(currentYear / 10) * 10;
 
-                    const endYear = startYear + 9;
-                    contentDate.textContent = `${startYear}-${endYear}`;
-                    _this.generateYearBox(startYear);
-                }
-            })
+                const endYear = startYear + 9;
+                contentDate.textContent = `${startYear}-${endYear}`;
+                _this.generateYearBox(startYear);
+            }
+        })
+
+        prevBtn.addEventListener('click', prevBtnFunc);
+
+        nextBtn.addEventListener('click', nextBtnFunc);
+
+        // Scroll events to navigate months in dates view or years in months view
+        calendar.addEventListener("wheel", (e) => {
+            e.preventDefault();
+            e.deltaY > 0 ? nextBtnFunc() : prevBtnFunc();
+        });
+
+        monthBox.addEventListener("wheel", (e) => {
+            e.preventDefault();
+            e.deltaY > 0 ? nextBtnFunc() : prevBtnFunc();
+        });
+
+        yearBox.addEventListener("wheel", (e) => {
+            e.preventDefault();
+            e.deltaY > 0 ? nextBtnFunc() : prevBtnFunc();
+        });
     },
     start: function () {
         this.getCurrentHeaderDate();

@@ -13,64 +13,73 @@
 <body>
     <div class="app">
         <!-- Header -->
-        <section class="header">
-            <div class="header__time-box">
-                <span class="header__date">Monday, November 11</span>
-            </div>
-            <div class="icon pointer">
-                <i class="fa-solid fa-angle-down"></i>
-            </div>
-        </section>
-        <!-- Content -->
-        <section class="content">
-            <div class="content__heading flex-box">
-                <div class="current__month--year pointer"></div>
-                <div class="content__arrow flex-box">
-                    <div class="content__arrow--icon content__arrow-up pointer">
-                        <i class="fa-solid fa-caret-up"></i>
-                    </div>
-                    <div class="content__arrow--icon content__arrow-down pointer">
-                        <i class="fa-solid fa-caret-down"></i>
-                    </div>
-                   
+        <div class="main">
+            <section class="header">
+                <div class="header__time-box">
+                    <span class="header__date">Monday, November 11</span>
                 </div>
-            </div>
-            <ul class="content__date-box ul-flex-box pointer">
-                <ul class="content__weekday ul-flex-box">
-                    <li>Su</li>
-                    <li>Mo</li>
-                    <li>Tu</li>
-                    <li>We</li>
-                    <li>Th</li>
-                    <li>Fr</li>
-                    <li>Sa</li>
+                <div class="icon pointer">
+                    <i class="fa-solid fa-angle-down"></i>
+                </div>
+            </section>
+            <!-- Content -->
+            <section class="content">
+                <div class="content__heading flex-box">
+                    <div class="current__month--year pointer"></div>
+                    <div class="content__arrow flex-box">
+                        <div class="content__arrow--icon content__arrow-up pointer">
+                            <i class="fa-solid fa-caret-up"></i>
+                        </div>
+                        <div class="content__arrow--icon content__arrow-down pointer">
+                            <i class="fa-solid fa-caret-down"></i>
+                        </div>
+                       
+                    </div>
+                </div>
+                <ul class="content__date-box ul-flex-box pointer">
+                    <ul class="content__weekday ul-flex-box">
+                        <li>Su</li>
+                        <li>Mo</li>
+                        <li>Tu</li>
+                        <li>We</li>
+                        <li>Th</li>
+                        <li>Fr</li>
+                        <li>Sa</li>
+                    </ul>
                 </ul>
-            </ul>
-            <ul class="content__month-box ul-flex-box pointer"></ul>
-            <ul class="content__year-box ul-flex-box pointer"></ul>
-        </section>
-
-        <!-- Footer section -->
-        <footer class="footer">
-            <div class="footer__date flex-box">
-                <div class="footer__date--second">
-                    <div class="icon pointer">
-                        <i class="fa-solid fa-minus"></i>
+                <ul class="content__month-box ul-flex-box pointer"></ul>
+                <ul class="content__year-box ul-flex-box pointer"></ul>
+            </section>
+    
+            <!-- Footer section -->
+            <footer class="footer">
+                <div class="footer__date flex-box">
+                    <div class="footer__date--second">
+                        <div id="minus" class="icon pointer">
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                        <div class="duration"><span>30</span> mins</div>
+                        <div id="plus" class="icon pointer">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
                     </div>
-                    <span><strong>30</strong> mins</span>
-                    <div class="icon pointer">
-                        <i class="fa-solid fa-plus"></i>
+                    <div class="focus">
+                        <div style="padding: 0.4rem 0.8rem;" class="icon pointer">
+                            <i style="width: 1rem;" class="fa-solid fa-play"></i>
+                            <span style="margin-left: 4px;">Focus</span>
+                        </div>
                     </div>
                 </div>
-                <div class="focus">
-                    <div style="padding-top: 0.4rem; padding-bottom: 0.4rem;" class="icon pointer">
-                        <i class="fa-solid fa-play"></i>
-                        <span style="margin-left: 4px;">Focus</span>
-                    </div>
-                </div>
+            </footer>
+        </div>
+        <div class="time-out">
+            <span class="time-out-int">00:00</span>
+            <div class="icon icon-timer">
+                <i class="fa-solid fa-pause"></i>
             </div>
-        </footer>
+        </div>
     </div>
     <script src="./assets/js/calendar.js"></script>
+    <script src="./assets/js/count-time.js"></script>
 </body>
 </html>
