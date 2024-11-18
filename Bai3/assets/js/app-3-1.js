@@ -7,17 +7,19 @@ const slideItem = document.querySelectorAll('.slide-item');
 
 const appBgImage = document.querySelectorAll('.app__bg--image');
 
+//element slide
 let prevSlide = document.querySelector('.prev-slide');
 let currentSlide = document.querySelector('.current-slide');
 let nextSlide = document.querySelector('.next-slide');
+//background slide
+let prevBgImage = document.querySelector('.bg__prev--image');
+let currentBgImage = document.querySelector('.bg__current--image');
+let nextBgImage = document.querySelector('.bg__next--image');
 
 
 const dogApi = 'https://dog.ceo/api/breeds/image/random/3';
 
 let imgDog;
-
-console.log("Check imgDog: ", imgDog);
-
 
 const app = {
     getImageDog: async function () {
@@ -34,34 +36,38 @@ const app = {
             return [];
         }
     },
-    generateBackgroundImage: function (imageUrl) {
-        htmls = ``;
-
-        htmls += `
-            <div class="app__bg--image bg__current--image">
-                <img src="${imageUrl.message[1]}" alt="" />
-            </div>
-            <div class="app__bg--image bg__next--image">
-                <img src="${imageUrl.message[0]}" alt="" />
-            </div>
-            <div class="app__bg--image bg__prev--image">
-                <img src="${imageUrl.message[2]}" alt="" />
-            </div>
-        `
-        appBackground.innerHTML = htmls;
-
-    },
     renderImages: function (images) {
         slideItem.forEach((item, index) => {
-            item.style.backgroundImage = `url('${images.message[index]}')`
+            const imgElement = document.createElement('img');
+            imgElement.src = `${images.message[index]}`
+            item.appendChild(imgElement);
         })
-        this.generateBackgroundImage(images);
+        appBgImage.forEach((item, index) => {
+            const imgElement = document.createElement('img');
+            imgElement.src = `${images.message[index]}`
+            item.appendChild(imgElement);
+        });
     },
     displayImg: function () {
         this.renderImages(imgDog);
     },
     handleEvent: function () {
+        function swapImage() {
+            slideItem.forEach(item => {
+                item.classList.remove('prev-slide', 'current-slide', 'next-slide');
+            });
 
+            prevSlide.classList.add('prev-slide');
+            currentSlide.classList.add('current-slide');
+            nextSlide.classList.add('next-slide');
+        }
+
+        prevBtn.addEventListener("click", function () {
+
+        })
+        nextBtn.addEventListener("click", function () {
+
+        })
     },
     start: async function () {
         await this.getImageDog();

@@ -7,6 +7,7 @@ const timeOut = document.querySelector('.time-out');
 const timeOutSpan = document.querySelector('.time-out span');
 const iConTimer = document.querySelector('.icon-timer');
 const iConI = document.querySelector('.icon-timer .fa-solid');
+const closeIcon = document.querySelector('.close');
 
 let defaultPeriod = 30;
 let interval;
@@ -104,6 +105,15 @@ const app2 = {
                 timeOut.style.display = 'none';
                 focusSpan.textContent = 'Focus';
             }
+        })
+
+        closeIcon.addEventListener('click', function () {
+            clearInterval(interval);
+            remainingTime = null;
+            isRunning = false;
+            timeOutSpan.textContent = `${defaultPeriod}`;
+            timeOut.style.display = 'none';
+            focusSpan.textContent = 'Focus';
         })
     },
     start: function () {
